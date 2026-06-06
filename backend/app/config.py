@@ -32,6 +32,9 @@ class Settings(BaseSettings):
     test_size: float = 0.2
     random_state: int = 42
 
+    # Google Places (opcional — alinha resultados com o Google Maps)
+    google_maps_api_key: str = ""
+
     @field_validator("csv_path", "model_path", mode="before")
     @classmethod
     def resolve_path(cls, value: str | Path) -> Path:

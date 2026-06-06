@@ -1,3 +1,5 @@
+const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:8000";
+
 export type NearbyClinic = {
   id: string;
   name: string;
@@ -8,22 +10,11 @@ export type NearbyClinic = {
   mapsUrl: string;
 };
 
-function haversineKm(
-  lat1: number,
-  lon1: number,
-  lat2: number,
-  lon2: number,
-): number {
-  const R = 6371;
-  const dLat = ((lat2 - lat1) * Math.PI) / 180;
-  const dLon = ((lon2 - lon1) * Math.PI) / 180;
-  const a =
-    Math.sin(dLat / 2) ** 2 +
-    Math.cos((lat1 * Math.PI) / 180) *
-      Math.cos((lat2 * Math.PI) / 180) *
-      Math.sin(dLon / 2) ** 2;
-  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-}
+export type ClinicsSearchResult = {
+  source: "google" | "openstreetmap";
+  clinics: NearbyClinic[];
+  mapsSearchUrl: string;
+};
 
 type OverpassElement = {
   type: string;
@@ -38,6 +29,30 @@ function elementCoords(el: OverpassElement): { lat: number; lon: number } | null
   if (el.lat != null && el.lon != null) return { lat: el.lat, lon: el.lon };
   if (el.center) return el.center;
   return null;
+}
+
+function haversineKm(
+  lat1: number,
+  lon1: number,
+  lat2: number,
+  lon2: number
+): number {
+  const R = 6371;
+
+  const toRad = (deg: number): number => deg * Math.PI / 180;
+
+  const dLat = toRad(lat2 - lat1);
+  const dLon = toRad(lon2 - lon1);
+
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(lat1)) *
+    Math.cos(toRad(lat2)) *
+    Math.sin(dLon / 2) ** 2;
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+  return R * c;
 }
 
 function elementName(tags: Record<string, string> | undefined): string {

@@ -72,6 +72,21 @@
   color: var(--text);
 }
 
+.nav-user {
+  max-width: 10rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted, #555);
+}
+
+.nav-btn-logout {
+  background: transparent;
+  border-color: var(--text-muted, #999);
+}
+
 .hero {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;

@@ -4,13 +4,19 @@ import { getApiDocsUrl } from "../services/api";
 type LandingPageProps = {
   apiOnline: boolean | null;
   modelLoaded: boolean;
+  hasAccount: boolean;
   onStartQuestionnaire: () => void;
+  onCreateAccount: () => void;
+  onLogin: () => void;
 };
 
 export function LandingPage({
   apiOnline,
   modelLoaded,
+  hasAccount,
   onStartQuestionnaire,
+  onCreateAccount,
+  onLogin,
 }: LandingPageProps) {
   return (
     <>
@@ -31,6 +37,16 @@ export function LandingPage({
             >
               Começar questionário
             </button>
+            {!hasAccount ? (
+              <>
+                <button type="button" className="btn btn-outline" onClick={onLogin}>
+                  Entrar
+                </button>
+                <button type="button" className="btn btn-outline" onClick={onCreateAccount}>
+                  Criar conta
+                </button>
+              </>
+            ) : null}
             <a className="btn btn-outline" href="#mobile">
               App no celular
             </a>

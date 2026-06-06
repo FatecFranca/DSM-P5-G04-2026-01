@@ -2,6 +2,16 @@
   margin-top: 1rem;
 }
 
+.nearby-status {
+  margin: 0;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.nearby-retry {
+  margin-top: 0.85rem;
+}
+
 .nearby-error {
   color: #b54545;
   font-size: 0.9rem;
