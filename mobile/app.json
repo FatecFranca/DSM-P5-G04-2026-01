@@ -1,0 +1,17 @@
+{
+  "expo": {
+    "name": "mobile",
+    "slug": "mobile",
+    "splash": {
+      "image": "./assets/logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "extra": {
+      "BASE_URL": "http://192.168.100.88:8080"
+    },
+    "android": {
+      "package": "com.anonymous.mobile"
+    }
+  }
+}
