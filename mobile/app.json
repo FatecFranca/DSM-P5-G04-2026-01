@@ -8,10 +8,12 @@
       "backgroundColor": "#ffffff"
     },
     "extra": {
-      "BASE_URL": "http://192.168.100.88:8080"
+      "API_USERS_URL": "http://20.110.145.100/users",
+      "API_ML_URL": "http://20.110.145.100/ml"
     },
     "android": {
       "package": "com.anonymous.mobile"
     }
   }
 }
+

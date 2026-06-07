@@ -1,10 +1,19 @@
-import axios from 'axios';
+import axios from "axios";
 import Constants from "expo-constants";
 
-const { BASE_URL } = Constants.expoConfig.extra;
+const {
+  API_USERS_URL,
+  API_ML_URL,
+} = Constants.expoConfig.extra;
 
-const api = axios.create({
-    baseURL: BASE_URL || "http://localhost:8080"
-})
+export const usersApi = axios.create({
+  baseURL: API_USERS_URL || "http://SEU_IP:8001",
+  timeout: 10000,
+});
 
-export default api;
+export const mlApi = axios.create({
+  baseURL: API_ML_URL || "http://SEU_IP:8000",
+  timeout: 10000,
+});
+
+export default usersApi;

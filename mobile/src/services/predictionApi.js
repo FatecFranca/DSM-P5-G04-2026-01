@@ -1,29 +1,11 @@
-import axios from "axios";
-import {
-  API_ML_URL,
-} from "@env";
+import { mlApi } from "./api";
 
-const api = axios.create({
-  baseURL: API_ML_URL,
-});
-
-export async function predict(
-  payload
-) {
-  const response =
-    await api.post(
-      "/predict",
-      payload
-    );
-
+export async function predict(payload) {
+  const response = await mlApi.post("/predict", payload);
   return response.data;
 }
 
 export async function getMlHealth() {
-  const response =
-    await api.get(
-      "/health"
-    );
-
+  const response = await mlApi.get("/health");
   return response.data;
 }

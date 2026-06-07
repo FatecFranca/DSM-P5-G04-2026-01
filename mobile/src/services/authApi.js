@@ -1,41 +1,16 @@
-import axios from "axios";
-import {
-  API_USERS_URL,
-} from "@env";
+import { usersApi } from "./api";
 
-const api = axios.create({
-  baseURL: API_USERS_URL,
-});
-
-export async function loginUser(
-  data
-) {
-  const response =
-    await api.post(
-      "/auth/login",
-      data
-    );
-
+export async function loginUser(data) {
+  const response = await usersApi.post("/auth/login", data);
   return response.data;
 }
 
-export async function createUser(
-  data
-) {
-  const response =
-    await api.post(
-      "/users",
-      data
-    );
-
+export async function createUser(data) {
+  const response = await usersApi.post("/users", data);
   return response.data;
 }
 
 export async function getUsersHealth() {
-  const response =
-    await api.get(
-      "/health"
-    );
-
+  const response = await usersApi.get("/health");
   return response.data;
 }

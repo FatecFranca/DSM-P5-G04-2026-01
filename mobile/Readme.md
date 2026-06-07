@@ -98,34 +98,16 @@ O aplicativo utiliza duas APIs:
 | Usuários / Login | `src/services/authApi.js`       |
 | Predição ML      | `src/services/predictionApi.js` |
 
-### Exemplo
-
-```javascript
-// authApi.js
-const API_URL = "http://SEU_IP:8001";
-```
-
-```javascript
-// predictionApi.js
-const API_URL = "http://SEU_IP:8000";
-```
 
 ### Importante
 
-Ao executar o aplicativo em celular físico ou emulador Android, não utilize:
-
-```text
-localhost
-127.0.0.1
-```
-
-Utilize o IP da máquina que está executando os backends.
+Ao executar o aplicativo em celular físico ou emulador Android, utilize seu ip local na mobile/src/services/api.js:
 
 Exemplo:
 
 ```text
-http://192.168.0.100:8000
-http://192.168.0.100:8001
+http://SEU_IP:8000
+http://SEU_IP:8001
 ```
 
 Para descobrir o IP da máquina:

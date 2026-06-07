@@ -22,8 +22,13 @@ copy .env.example .env
 ## Variáveis de ambiente
 
 ```env
+# Local
 VITE_API_URL=http://localhost:8000
 VITE_USERS_API_URL=http://localhost:8001
+
+# Produção / Azure
+VITE_API_URL=http://20.110.145.100/ml
+VITE_USERS_API_URL=http://20.110.145.100/users
 ```
 
 ## Executar
@@ -32,7 +37,8 @@ VITE_USERS_API_URL=http://localhost:8001
 npm run dev
 ```
 
-Acesse http://localhost:5173
+Acesse localmente por http://localhost:5173
+Acesse online por http://20.110.145.100
 
 ## Fluxos na interface
 
@@ -52,5 +58,3 @@ A sessão é guardada em `localStorage` (`pi5_user`). O questionário funciona s
 npm run build
 npm run preview
 ```
-
-Configure `VITE_API_URL` e `VITE_USERS_API_URL` com as URLs reais do deploy.
