@@ -1,0 +1,50 @@
+name: Deploy Azure VM
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy na VM Azure
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Acessar VM e atualizar projeto
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.AZURE_VM_HOST }}
+          username: ${{ secrets.AZURE_VM_USER }}
+          key: ${{ secrets.AZURE_VM_SSH_KEY }}
+          script: |
+            set -e
+
+            cd /home/AdminPI05/DSM-P5-G04-2026-01
+
+            echo "Atualizando repositório..."
+            git fetch origin
+            git reset --hard origin/main
+
+            echo "Atualizando backend..."
+            cd backend
+            npm install
+            npx prisma generate
+            npx prisma db push
+
+            echo "Reiniciando APIs no PM2..."
+            pm2 restart node-api
+            pm2 restart python-api
+            pm2 save
+
+            echo "Atualizando frontend..."
+            cd ../frontend
+            npm install
+            npm run build
+
+            echo "Reiniciando Nginx..."
+            sudo systemctl restart nginx
+
+            echo "Testando serviços..."
+            curl http://localhost:8001/health
+            curl http://localhost:8000/health
